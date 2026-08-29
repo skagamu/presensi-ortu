@@ -1,20 +1,19 @@
 {
-  "name": "Sistem Presensi BK",
-  "short_name": "Presensi BK",
-  "description": "Sistem Informasi Presensi dan Pelanggaran Kedisiplinan Siswa",
-  "start_url": "/presensi-siswa/",
+  "name": "Presensi Siswa Ortu - SMK Gajah Mungkur 1",
+  "short_name": "Presensi Ortu",
+  "description": "Portal Presensi Kehadiran Siswa untuk Wali Murid SMK Gajah Mungkur 1 Wuryantoro",
+  "start_url": "/presensi-ortu/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#2563eb",
-  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ea580c",
   "icons": [
     {
-      "src": "/presensi-siswa/icon-192.png",
+      "src": "/presensi-ortu/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/presensi-siswa/icon-512.png",
+      "src": "/presensi-ortu/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
