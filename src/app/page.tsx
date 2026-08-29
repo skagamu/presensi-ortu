@@ -5,7 +5,6 @@ import {
   ArrowLeft, 
   Check, 
   ChevronRight, 
-  GraduationCap, 
   Wrench, 
   Calculator, 
   ShoppingBag, 
@@ -18,7 +17,6 @@ import {
   CheckCircle2, 
   Search, 
   RotateCcw,
-  Sparkles,
   School,
   X
 } from "lucide-react";
@@ -185,10 +183,9 @@ export default function OrtuOnboardingPage() {
   // Available Classes for selected Jurusan
   const availableClasses = useMemo(() => {
     if (!selectedJurusanKey) return [];
-    const classes = Array.from(
+    return Array.from(
       new Set(allStudents.filter(s => s.jurusan === selectedJurusanKey).map(s => s.kelas))
     ).sort();
-    return classes;
   }, [allStudents, selectedJurusanKey]);
 
   // Available Students for selected Class
@@ -261,12 +258,12 @@ export default function OrtuOnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-900 sm:py-8 flex justify-center items-center">
-      {/* MOBILE DEVICE CONTAINER */}
-      <div className="w-full max-w-md min-h-screen sm:min-h-[844px] bg-slate-50 sm:rounded-[40px] shadow-2xl flex flex-col justify-between overflow-hidden border border-slate-200/50 relative">
+    <div className="min-h-[100dvh] bg-neutral-900 sm:py-6 flex justify-center items-center">
+      {/* MOBILE DEVICE CONTAINER (FIXED VIEWPORT HEIGHT) */}
+      <div className="w-full max-w-md h-[100dvh] sm:h-[844px] max-h-[100dvh] sm:max-h-[844px] bg-slate-50 sm:rounded-[40px] shadow-2xl flex flex-col justify-between overflow-hidden border border-slate-200/50 relative">
         
-        {/* TOP STATUS BAR & HEADER */}
-        <div className="pt-4 px-6 pb-2">
+        {/* TOP STATUS BAR & HEADER (STICKY HEADER) */}
+        <div className="pt-4 px-5 sm:px-6 pb-2 shrink-0 bg-slate-50/90 backdrop-blur z-10 border-b border-slate-100">
           <div className="flex items-center justify-between">
             {/* Back Button */}
             {step > 1 ? (
@@ -292,10 +289,10 @@ export default function OrtuOnboardingPage() {
           </div>
         </div>
 
-        {/* STEP BODY */}
-        <div className="flex-1 px-6 pt-4 pb-6 overflow-y-auto">
+        {/* STEP BODY (SCROLLABLE CONTENT) */}
+        <div className="flex-1 px-5 sm:px-6 pt-4 pb-6 overflow-y-auto overscroll-contain">
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center h-80 space-y-3">
+            <div className="flex flex-col items-center justify-center h-full space-y-3">
               <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
               <p className="text-sm font-semibold text-slate-600">Memuat data sekolah...</p>
             </div>
@@ -303,10 +300,10 @@ export default function OrtuOnboardingPage() {
             <>
               {/* STEP 1: PILIH JURUSAN */}
               {step === 1 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
                   <div>
                     <span className="text-[11px] font-bold tracking-widest text-orange-600 uppercase">Langkah 1 dari 3</span>
-                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-0.5">
                       Pilih Jurusan Keahlian
                     </h2>
                     <p className="text-xs text-slate-500 mt-1">
@@ -314,7 +311,7 @@ export default function OrtuOnboardingPage() {
                     </p>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="space-y-3 pb-2">
                     {availableJurusans.map(({ key, meta }) => {
                       const Icon = meta.icon;
                       const isSelected = selectedJurusanKey === key;
@@ -356,10 +353,10 @@ export default function OrtuOnboardingPage() {
 
               {/* STEP 2: PILIH KELAS */}
               {step === 2 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
                   <div>
                     <span className="text-[11px] font-bold tracking-widest text-orange-600 uppercase">Langkah 2 dari 3</span>
-                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-0.5">
                       Pilih Ruang Kelas
                     </h2>
                     <p className="text-xs text-slate-500 mt-1">
@@ -367,7 +364,7 @@ export default function OrtuOnboardingPage() {
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-3 pb-2">
                     {availableClasses.map((kelas) => {
                       const isSelected = selectedKelas === kelas;
                       const countInClass = allStudents.filter(s => s.kelas === kelas).length;
@@ -410,7 +407,7 @@ export default function OrtuOnboardingPage() {
                 <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
                   <div>
                     <span className="text-[11px] font-bold tracking-widest text-orange-600 uppercase">Langkah 3 dari 3</span>
-                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-1">
+                    <h2 className="text-2xl font-black text-slate-900 tracking-tight mt-0.5">
                       Pilih Nama Siswa
                     </h2>
                     <p className="text-xs text-slate-500 mt-1">
@@ -429,7 +426,7 @@ export default function OrtuOnboardingPage() {
                     />
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 pb-2">
                     {availableStudents.length === 0 ? (
                       <div className="text-center py-8 text-xs text-slate-500">
                         Tidak ada nama siswa yang sesuai.
@@ -476,7 +473,7 @@ export default function OrtuOnboardingPage() {
 
               {/* STEP 4: HASIL PRESENSI SISWA */}
               {step === 4 && activeSiswa && (
-                <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300">
+                <div className="space-y-5 animate-in fade-in slide-in-from-right-4 duration-300 pb-2">
                   {/* Student Badge Card */}
                   <div className="bg-gradient-to-br from-orange-600 to-amber-600 text-white rounded-3xl p-5 shadow-lg relative overflow-hidden">
                     <div className="relative z-10">
@@ -593,26 +590,37 @@ export default function OrtuOnboardingPage() {
           )}
         </div>
 
-        {/* BOTTOM ACTION CTA (ONBOARDING BUTTON) */}
-        {!isLoading && step < 4 && (
-          <div className="p-6 pt-2 bg-slate-50/90 backdrop-blur-sm border-t border-slate-100">
-            <button
-              type="button"
-              disabled={
-                (step === 1 && !selectedJurusanKey) ||
-                (step === 2 && !selectedKelas) ||
-                (step === 3 && !selectedNis)
-              }
-              onClick={() => {
-                if (step === 1 && selectedJurusanKey) setStep(2);
-                else if (step === 2 && selectedKelas) setStep(3);
-                else if (step === 3 && selectedNis) setStep(4);
-              }}
-              className="w-full py-4 px-6 rounded-2xl bg-orange-600 hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold text-sm shadow-md disabled:shadow-none transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
-            >
-              <span>{step === 3 ? "Lihat Presensi Siswa" : "Lanjutkan"}</span>
-              <ChevronRight className="w-4 h-4 stroke-[3]" />
-            </button>
+        {/* BOTTOM ACTION CTA (ALWAYS PINNED TO BOTTOM) */}
+        {!isLoading && (
+          <div className="p-4 sm:p-5 pt-3 bg-slate-50/95 backdrop-blur-md border-t border-slate-200/70 shrink-0 z-20 shadow-[0_-4px_12px_rgba(0,0,0,0.03)]">
+            {step < 4 ? (
+              <button
+                type="button"
+                disabled={
+                  (step === 1 && !selectedJurusanKey) ||
+                  (step === 2 && !selectedKelas) ||
+                  (step === 3 && !selectedNis)
+                }
+                onClick={() => {
+                  if (step === 1 && selectedJurusanKey) setStep(2);
+                  else if (step === 2 && selectedKelas) setStep(3);
+                  else if (step === 3 && selectedNis) setStep(4);
+                }}
+                className="w-full py-3.5 sm:py-4 px-6 rounded-2xl bg-orange-600 hover:bg-orange-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-bold text-sm shadow-md disabled:shadow-none transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+              >
+                <span>{step === 3 ? "Lihat Presensi Siswa" : "Lanjutkan"}</span>
+                <ChevronRight className="w-4 h-4 stroke-[3]" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleResetAll}
+                className="w-full py-3.5 sm:py-4 px-6 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Pilih Siswa Lain</span>
+              </button>
+            )}
           </div>
         )}
 
@@ -659,7 +667,7 @@ export default function OrtuOnboardingPage() {
               )}
             </div>
 
-            {/* Modal Footer Close Button for Extra Accessibility */}
+            {/* Modal Footer Close Button */}
             <div className="p-3 bg-slate-950 border-t border-slate-800 shrink-0 flex justify-end">
               <button
                 type="button"
